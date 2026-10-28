@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: oeehugorestrepo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 2 --timeout 120
+    healthCheckPath: /api/estado
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: SECRET_KEY
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: APP_USUARIO
+        sync: false
+      - key: APP_CLAVE
+        sync: false
